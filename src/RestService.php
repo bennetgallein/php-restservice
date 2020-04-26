@@ -215,13 +215,17 @@ class RestService
      * @throws Exception
      * @throws SocketException
      */
-    public function post($uri, $params = [], array $headers = [], $returnResponseBodyOnly = true)
+    public function post($uri, $params = [], array $headers = [], $returnResponseBodyOnly = true, $isJson = true)
     {
         $uri = $this->apiEndpoint . $uri;
-        $options = [
-            'headers' => ((empty($headers)) ? $this->getRequestHeaders() : $headers),
-            'json' => $params
-        ];
+
+        if ($isJson) {
+            $b = ['json' => $params];
+        } else {
+            $b = ['form_params' => $params];
+        }
+
+        $options = array_merge(['headers' => ((empty($headers)) ? $this->getRequestHeaders() : $headers)], $b);
 
         if ($this->isFireAndForget) {
             return $this->fire('POST', $uri, $options);
