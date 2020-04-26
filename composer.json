@@ -1,5 +1,5 @@
 {
-    "name": "abhilashpujari/php-restservice",
+    "name": "bennetgallein/php-restservice",
     "description" : "Simple PHP Wrapper class for making REST API calls",
     "type": "library",
     "keywords": ["http", "rest", "php", "curl", "client", "HTTP client"],
@@ -8,7 +8,11 @@
         {
             "name": "Abhilash Pujari",
             "email": "abhilashpujari11@gmail.com"
-        }
+        },
+	{
+	    "name": "Bennet Gallein",
+	    "email": "me@bennetgallein.de"
+	}
     ],
     "minimum-stability": "stable",
     "require": {
