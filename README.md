@@ -45,6 +45,8 @@ php composer.phar update
      ->setEndpoint('https://jsonplaceholder.typicode.com')
      ->get('/posts/1');
  ```
+Note: You can also use `RestService::getInstance()` to get an Instance of the class to use. This elimiated the calling for `new` inside your code. This will always return a new Instance. Singleton pattern is currently not supported. 
+
 
 2 POST Request
 
@@ -107,6 +109,9 @@ $restService
      ])
      ->post('/posts');
 ```
+Note: to set Authorization header for all requests, you can use `setAuthorizationHeader($token)`.
+This will require the token to be with the `Bearer ` preceding the actual token.
+
 
 8 Request in which we request the response data which includes status code, headers, body etc,
 which can be done by setting request method 4th parameter to false
