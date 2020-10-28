@@ -61,6 +61,11 @@ class RestService
         $this->resetRequest();
     }
 
+    public static function getInstance($options = [])
+    {
+        return new self($options);
+    }
+
     /**
      * @return array
      */
@@ -114,8 +119,10 @@ class RestService
      */
     public function getResponseBody(PsrResponse $response)
     {
-        if (!empty($response->getHeader('Content-Type')) && stristr($response->getHeader('Content-Type')[0],
-                'application/json')
+        if (!empty($response->getHeader('Content-Type')) && stristr(
+            $response->getHeader('Content-Type')[0],
+            'application/json'
+        )
         ) {
             return json_decode(
                 $response->getBody()
