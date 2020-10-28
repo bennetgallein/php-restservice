@@ -77,12 +77,29 @@ class RestService
     }
 
     /**
+     * set a authorization tokem
+     *
+     * @param string $value
+     * @return RestService
+     */
+    protected function setAuthorizationHeader($value)
+    {
+        $this->requestHeaders[] = [
+            'Authorization' => $value
+        ];
+        return $this;
+    }
+
+    /**
      * @param $requestHeaders
      * @return RestService
      */
     public function setRequestHeaders($requestHeaders)
     {
-        $this->requestHeaders = $requestHeaders;
+        $this->requestHeaders = array_merge(
+            $this->requestHeaders,
+            $requestHeaders
+        );
         return $this;
     }
 
@@ -114,8 +131,10 @@ class RestService
      */
     public function getResponseBody(PsrResponse $response)
     {
-        if (!empty($response->getHeader('Content-Type')) && stristr($response->getHeader('Content-Type')[0],
-                'application/json')
+        if (!empty($response->getHeader('Content-Type')) && stristr(
+            $response->getHeader('Content-Type')[0],
+            'application/json'
+        )
         ) {
             return json_decode(
                 $response->getBody()
