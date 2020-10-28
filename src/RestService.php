@@ -82,12 +82,29 @@ class RestService
     }
 
     /**
+     * set a authorization tokem
+     *
+     * @param string $value
+     * @return RestService
+     */
+    protected function setAuthorizationHeader($value)
+    {
+        $this->requestHeaders[] = [
+            'Authorization' => $value
+        ];
+        return $this;
+    }
+
+    /**
      * @param $requestHeaders
      * @return RestService
      */
     public function setRequestHeaders($requestHeaders)
     {
-        $this->requestHeaders = $requestHeaders;
+        $this->requestHeaders = array_merge(
+            $this->requestHeaders,
+            $requestHeaders
+        );
         return $this;
     }
 
